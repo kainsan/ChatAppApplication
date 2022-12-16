@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chatappapplication.R;
+import com.example.chatappapplication.Register;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
         this.messagesLists = messagesLists;
         this.context = context;
     }
+
 
     @NonNull
     @Override

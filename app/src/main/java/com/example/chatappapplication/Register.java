@@ -27,7 +27,7 @@ public class Register extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseApp.initializeApp(this);
+
         setContentView(R.layout.activity_register);
 
 
@@ -50,6 +50,7 @@ public class Register extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +85,7 @@ public class Register extends AppCompatActivity {
                                 //save mobile to memory
                                 MemoryData.saveData(mobileTxt,Register.this);
 
-                                //save name to memmory
+                                //save name to memory
                                 MemoryData.saveName(nameTxt,Register.this);
                                 Toast.makeText(Register.this,"Success",Toast.LENGTH_SHORT).show();
 
