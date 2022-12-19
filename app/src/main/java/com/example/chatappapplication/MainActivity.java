@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private  String name;
      private RecyclerView messagesRecyclerView;
      private MessagesAdapter messagesAdapter;
-    private  List<MessagesList> messagesList;
+    private  List<MessagesList> messagesList = new ArrayList<>();
+
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://chatappapplication-582b0-default-rtdb.firebaseio.com/");
 
     @Override
@@ -40,9 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
 
-
         messagesRecyclerView =  findViewById(R.id.messagesRecyclerView);
-        messagesList = new ArrayList<MessagesList>();
         messagesAdapter = new MessagesAdapter(messagesList ,this);
 
              //get intent data from Register.class activity
@@ -78,6 +77,36 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 progressDialog.dismiss();
            }
+        });
+
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                messagesList.clear();
+
+                for (DataSnapshot dataSnapshot : snapshot.child("users").getChildren()){
+
+                    final  String getMobile = dataSnapshot.getKey();
+
+                    if(!getMobile.equals(mobile))
+                    {
+                       final String getName= dataSnapshot.child("name").getValue(String.class);
+                       final String getProfilePic = dataSnapshot.child("profile_pic").getValue(String.class);
+
+                       MessagesList messagesList = new MessagesList(getName,getMobile,"",getProfilePic,0);
+                       messagesList.add(messagesList);
+                    }
+                }
+
+                messagesRecyclerView.setAdapter( new MessagesAdapter(messagesList,MainActivity.this));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
     }
 }

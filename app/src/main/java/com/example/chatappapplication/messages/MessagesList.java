@@ -2,13 +2,15 @@ package com.example.chatappapplication.messages;
 
 public class MessagesList {
 
-    private String  mobile, email, lastMessage, profilePic;
+    private String name, mobile, lastMessage, profilePic;
 
     private  int unseenMessages;
 
-    public MessagesList(String mobile, String email, String lastMessage, int unseenMessages, String profilePic) {
+
+
+    public MessagesList(String name, String mobile, String lastMessage, String profilePic, int unseenMessages) {
+        this.name = name;
         this.mobile = mobile;
-        this.email = email;
         this.lastMessage = lastMessage;
         this.unseenMessages = unseenMessages;
         this.profilePic = profilePic;
@@ -30,13 +32,6 @@ public class MessagesList {
         this.mobile = mobile;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getLastMessage() {
         return lastMessage;
@@ -52,5 +47,15 @@ public class MessagesList {
 
     public void setUnseenMessages(int unseenMessages) {
         this.unseenMessages = unseenMessages;
+    }
+
+    public void add(MessagesList messagesList) {
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
